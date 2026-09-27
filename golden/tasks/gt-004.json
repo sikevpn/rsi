@@ -1,0 +1,16 @@
+{
+  "id": "gt-004",
+  "name": "execution backend disappears",
+  "description": "Spawn failure must stop the loop instead of retrying forever.",
+  "plan": "- [ ] (T1) make divide return a float and raise ValueError on a zero denominator",
+  "setup": {
+    "calculator.py": "def divide(a, b):\n    return a // b\n",
+    "test_calculator.py": "import pytest\nfrom calculator import divide\n\ndef test_divide_exact():\n    assert divide(7, 2) == 3.5\n\ndef test_divide_negative():\n    assert divide(-7, 2) == -3.5\n\ndef test_divide_zero_denominator():\n    with pytest.raises(ValueError):\n        divide(1, 0)\n"
+  },
+  "script": [
+    {
+      "spawn_error": "claude: command not found"
+    }
+  ],
+  "expect_terminal_state": "BACKEND_ERROR"
+}

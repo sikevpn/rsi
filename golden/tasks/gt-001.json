@@ -1,0 +1,28 @@
+{
+  "id": "gt-001",
+  "name": "honest fix, first attempt",
+  "description": "Worker fixes the code, writes an honest DONE.json. Baseline for the ratchet.",
+  "plan": "- [ ] (T1) make divide return a float and raise ValueError on a zero denominator",
+  "setup": {
+    "calculator.py": "def divide(a, b):\n    return a // b\n",
+    "test_calculator.py": "import pytest\nfrom calculator import divide\n\ndef test_divide_exact():\n    assert divide(7, 2) == 3.5\n\ndef test_divide_negative():\n    assert divide(-7, 2) == -3.5\n\ndef test_divide_zero_denominator():\n    with pytest.raises(ValueError):\n        divide(1, 0)\n"
+  },
+  "script": [
+    {
+      "files": {
+        "calculator.py": "def divide(a, b):\n    if b == 0:\n        raise ValueError(\"division by zero\")\n    return a / b\n"
+      },
+      "done": {
+        "status": "done",
+        "task": "T1",
+        "files_changed": [
+          "calculator.py"
+        ],
+        "test_command": "python3 -m pytest -q test_calculator.py",
+        "test_exit_code": 0,
+        "test_output": "3 passed"
+      }
+    }
+  ],
+  "expect_terminal_state": "COMPLETED"
+}

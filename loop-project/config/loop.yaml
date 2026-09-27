@@ -1,0 +1,23 @@
+# 外循环参数（报告 §4 允许自改的「参数级」配置）
+max_iterations: 50
+max_consecutive_failures: 3
+thrashing_threshold: 3
+max_cost_usd: 10.0
+max_tasks: 0
+timeout_s: 900
+
+test_commands:
+  - python3 -m pytest -q
+
+auditor_enabled: true
+
+inner_loop_every: 5
+min_samples_for_pattern: 3
+max_self_diff_lines: 50
+
+memory_max_chars: 4000
+
+# L1 report-only / L2 cautious / L3 unattended（报告 §3.3 自治阶梯）
+autonomy_level: L1
+
+kill_switch_file: LOOP_PAUSED

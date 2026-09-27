@@ -1,0 +1,24 @@
+{
+  "id": "gt-005",
+  "name": "task never converges",
+  "description": "Silent worker under a one-iteration budget hits the iteration limit.",
+  "plan": "- [ ] (T1) make divide return a float and raise ValueError on a zero denominator",
+  "setup": {
+    "calculator.py": "def divide(a, b):\n    return a // b\n",
+    "test_calculator.py": "import pytest\nfrom calculator import divide\n\ndef test_divide_exact():\n    assert divide(7, 2) == 3.5\n\ndef test_divide_negative():\n    assert divide(-7, 2) == -3.5\n\ndef test_divide_zero_denominator():\n    with pytest.raises(ValueError):\n        divide(1, 0)\n"
+  },
+  "script": [
+    {
+      "files": {
+        "calculator.py": "def divide(a, b):\n    return a // b\n"
+      },
+      "done": null
+    }
+  ],
+  "config_overrides": {
+    "max_iterations": 1,
+    "max_consecutive_failures": 99,
+    "thrashing_threshold": 99
+  },
+  "expect_terminal_state": "ITERATION_LIMIT"
+}

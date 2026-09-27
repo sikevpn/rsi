@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rsi"
+version = "0.1.0"
+description = "Recursive self-improvement loop orchestrator: thin glue over headless coding CLIs"
+requires-python = ">=3.10"
+# Zero third-party runtime dependencies by design (see RSI代理开发战略报告.md §5.1).
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pyyaml>=6"]
+
+[project.scripts]
+rsi = "rsi.cli:main"
+
+[tool.setuptools]
+packages = ["rsi"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

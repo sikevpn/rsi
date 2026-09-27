@@ -1,0 +1,14 @@
+# 自改门禁（报告 §4）。deny 优先级高于 allow；命中 deny 即拒绝。
+# 注意：rsi/**、gate.yaml 本身、.env*、secrets/、auth/、migrations/ 是硬编码黑名单，
+# 写在本文件里也删不掉（见 rsi/gate.py 的 HARD_DENY）。
+allow:
+  - prompts/*.md
+  - memories.md
+  - config/*.yaml
+  - skills/*.md
+deny:
+  - IMPLEMENTATION_PLAN.md
+  - receipts/**
+  - proposals.md
+max_files_per_change: 10
+max_diff_lines: 50
